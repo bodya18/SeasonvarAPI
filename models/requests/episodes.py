@@ -5,7 +5,7 @@ import json
 
 def GetEpisodeById(id):
     result = episodes.select().where(episodes.c.id == str(id))
-    return CONNECTION.execute(result).fetchone()
+    return CONNECTION.execute(result).one()
 
 def GetEpisodeBySeasonId(seazonId):
     result = select([text("episodes.*, voices.voice")]).where(
@@ -14,16 +14,16 @@ def GetEpisodeBySeasonId(seazonId):
             episodes.c.seazonId == seazonId
         )
     )
-    data = CONNECTION.execute(result).fetchall()
+    data = CONNECTION.execute(result).all()
     for i, res in enumerate(data):
-        data[i] = {"id": res[0], "title": res[1], "seazonId": res[2], "voiceId": res[3], "number": res[4], "link": res[5], "subtitles": res[6], "voice": res[7]}
+        data[i] = res._asdict()
     return json.dumps(data)
 
 
 
 def GetEpisodeByLink(link):
     result = episodes.select().where(episodes.c.link == str(link))
-    return CONNECTION.execute(result).fetchone()
+    return CONNECTION.execute(result).one()
 
 
 def GetEpisodeByTitle_SeazonId(title, seazonId):
@@ -33,7 +33,7 @@ def GetEpisodeByTitle_SeazonId(title, seazonId):
             episodes.c.seazonId == str(seazonId)
         )
     )
-    return CONNECTION.execute(result).fetchall()
+    return CONNECTION.execute(result).all()
 
 
 def InsertEpisode(title, voiceId, number, seazonId, link, subtitles = ''):

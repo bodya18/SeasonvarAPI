@@ -5,22 +5,23 @@ from models.tables import serials, CONNECTION
 
 def GetAllSerials():
     result = serials.select()
-    results = CONNECTION.execute(result).fetchall()
+    results = CONNECTION.execute(result).all()
     for i, res in enumerate(results):
-        results[i] = {'id':res[0], 'title': res[1]}
+        results[i] = res._asdict()
     return json.dumps(results)
 
 
 def GetSerialById(id):
     result = serials.select().where(serials.c.id == str(id))
-    data = CONNECTION.execute(result).fetchone()
-    return json.dumps({"id":data[0], "title": data[1]})
+    data = CONNECTION.execute(result).one()._asdict()
+    print(data)
+    return json.dumps(data)
 
 
 def GetSerialsByTitle(title):
     result = serials.select().where(serials.c.title == str(title))
-    data = CONNECTION.execute(result).fetchone()
-    return json.dumps({"id":data[0], "title": data[1]})
+    data = CONNECTION.execute(result).one()._asdict()
+    return json.dumps(data)
 
 
 def InsertSerial(title):
@@ -31,7 +32,7 @@ def InsertSerial(title):
 
 def GetRandomSerials(count):
     result = select(serials).order_by(func.rand()).limit(count)
-    results = CONNECTION.execute(result).fetchall()
+    results = CONNECTION.execute(result).all()
     for i, res in enumerate(results):
-        results[i] = {'id':res[0], 'title': res[1]}
+        results[i] = res._asdict()
     return json.dumps(results)

@@ -11,8 +11,3 @@ def randomSerials(count):
 @serials_route.route('/api/serials/<int:id>', methods=["GET"])
 def getSerial(id):
     return GetSerialById(id)
-
-
-@serials_route.route('/api/seazons/<int:serialId>', methods=["GET"])
-def getSeazonsBySerial(serialId):
-    return getSeazonsBySerial(serialId)
