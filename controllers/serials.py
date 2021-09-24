@@ -1,13 +1,13 @@
-from models.requests.serials import GetRandomSerials, GetSerialById
+import json
 from flask import Blueprint
 
-serials_route = Blueprint('serials_route', __name__)
+route = Blueprint('route', __name__)
 
-@serials_route.route('/api/serials/random/<int:count>', methods=["GET"])
+@route.route('/api/getRandomSerials/<int:count>', methods=["GET"])
 def randomSerials(count):
-    return GetRandomSerials(count)
+    data = json.dumps({"data": count})
+    print(data)
+    data = {"data": count}
+    print(data)
+    return json.dumps({"data": count})
 
-
-@serials_route.route('/api/serials/<int:id>', methods=["GET"])
-def getSerial(id):
-    return GetSerialById(id)
