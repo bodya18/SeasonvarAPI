@@ -1,6 +1,4 @@
-from operator import and_
 from models.tables import seasons, CONNECTION
-import json
 
 
 class Seasons:

@@ -22,3 +22,13 @@ def getSerial(id):
     serial = Serials.GetSerialById(id)
     serial['last_season'] = last_season
     return serial
+
+
+@serials_route.route('/api/serials', methods=["GET"])
+def GetAllSerials():
+    serials = Serials.GetAllSerials()
+    for i, serial in enumerate(serials):
+        last_season = Seasons.GetLastSeason(serial['id'])
+        serial['last_season'] = last_season
+        serials[i] = serial
+    return json.dumps(serials)
