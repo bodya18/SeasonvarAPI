@@ -10,18 +10,17 @@ class Serials:
         results = CONNECTION.execute(result).all()
         for i, res in enumerate(results):
             results[i] = res._asdict()
-        return json.dumps(results)
+        return results
 
     def GetSerialById(id):
         result = serials.select().where(serials.c.id == str(id))
         data = CONNECTION.execute(result).one()._asdict()
-        print(data)
-        return json.dumps(data)
+        return data
 
     def GetSerialsByTitle(title):
         result = serials.select().where(serials.c.title == str(title))
         data = CONNECTION.execute(result).one()._asdict()
-        return json.dumps(data)
+        return data
 
     def InsertSerial(title):
         ins = serials.insert().values(title=title)
@@ -33,4 +32,4 @@ class Serials:
         results = CONNECTION.execute(result).all()
         for i, res in enumerate(results):
             results[i] = res._asdict()
-        return json.dumps(results)
+        return results

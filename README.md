@@ -1,7 +1,7 @@
-/api/seazons/(:serialId) - все сезоны по Id сериала
+/api/seasons/(:serialId) - возвращает все сезоны по Id сериала
 
-/api/serials/random/(:count) - n-ное колличество серриалов(название + id)
+/api/serials/random/(:count) - возвращает n-ное колличество сериалов(название, id, последний сезон)
 
-/api/serials/(:id) - название и id сериала
+/api/serials/(:id) - возвращает название сериала, id сериала, последний сезон
 
-/api/series/(:seazonId) - все серии по id сезона
+/api/series/(:seasonId) - возвращает все серии по id сезона

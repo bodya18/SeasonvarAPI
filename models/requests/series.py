@@ -1,5 +1,5 @@
 from operator import and_
-from models.tables import episodes, seazons, voices, CONNECTION
+from models.tables import episodes, seasons, voices, CONNECTION
 from sqlalchemy.sql.expression import select, text
 import json
 
@@ -10,33 +10,33 @@ class Series:
         result = episodes.select().where(episodes.c.id == str(id))
         return CONNECTION.execute(result).one()
 
-    def GetEpisodeBySeasonId(seazonId):
+    def GetEpisodeBySeasonId(seasonId):
         result = select([text("episodes.*, voices.voice")]).where(
             and_(
                 episodes.c.voiceId == voices.c.id,
-                episodes.c.seazonId == seazonId
+                episodes.c.seasonId == seasonId
             )
         )
         data = CONNECTION.execute(result).all()
         for i, res in enumerate(data):
             data[i] = res._asdict()
-        return json.dumps(data)
+        return data
 
     def GetEpisodeByLink(link):
         result = episodes.select().where(episodes.c.link == str(link))
         return CONNECTION.execute(result).one()
 
-    def GetEpisodeByTitle_SeazonId(title, seazonId):
-        result = seazons.select().where(
+    def GetEpisodeByTitle_SeasonId(title, seasonId):
+        result = seasons.select().where(
             and_(
                 episodes.c.title == str(title),
-                episodes.c.seazonId == str(seazonId)
+                episodes.c.seasonId == str(seasonId)
             )
         )
         return CONNECTION.execute(result).all()
 
-    def InsertEpisode(title, voiceId, number, seazonId, link, subtitles=''):
+    def InsertEpisode(title, voiceId, number, seasonId, link, subtitles=''):
         ins = episodes.insert().values(title=title, voiceId=voiceId, number=number,
-                                       seazonId=seazonId, link=link, subtitles=subtitles)
+                                       seasonId=seasonId, link=link, subtitles=subtitles)
         result = CONNECTION.execute(ins)
         return result.lastrowid
