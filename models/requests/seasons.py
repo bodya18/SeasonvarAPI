@@ -6,7 +6,7 @@ import json
 class Seasons:
 
     def GetSeasonById(id):
-        result = seasons.select().where(seasons.c.id == str(id))
+        result = seasons.select().where(seasons.c.id == id)
         data = CONNECTION.execute(result).one()._asdict()
         return data
 
