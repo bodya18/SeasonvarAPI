@@ -4,7 +4,7 @@ from sqlalchemy.sql.expression import select, text
 import json
 
 
-class Episodes:
+class Series:
 
     def GetEpisodeById(id):
         result = episodes.select().where(episodes.c.id == str(id))
