@@ -31,7 +31,7 @@ episodes = Table(
     'episodes', meta,
     Column('id', Integer, primary_key=True, autoincrement=True),
     Column('title', String(255)),
-    Column('seasonId', Integer, ForeignKey('seasons.id')),
+    Column('seazonId', Integer, ForeignKey('seasons.id')),
     Column('voiceId', Integer, ForeignKey('voices.id')),
     Column('number', Integer, nullable=False),
     Column('link', String(255), nullable=False),
