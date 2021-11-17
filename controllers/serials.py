@@ -32,3 +32,9 @@ def GetAllSerials():
         serial['last_season'] = last_season
         serials[i] = serial
     return json.dumps(serials)
+
+
+@serials_route.route('/api/serials/search/<string:search>', methods=["GET"])
+def Search(search):
+    serials = Serials.Search(search)
+    return json.dumps(serials)

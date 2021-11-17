@@ -22,3 +22,11 @@ class Serials:
         for i, res in enumerate(results):
             results[i] = res._asdict()
         return results
+
+
+    def Search(search):
+        result = select(serials).where(serials.c.title.ilike(f'%{search}%'))
+        results = CONNECTION.execute(result).all()
+        for i, res in enumerate(results):
+            results[i] = res._asdict()
+        return results
