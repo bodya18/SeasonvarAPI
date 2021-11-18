@@ -21,8 +21,10 @@ class Seasons:
         result = CONNECTION.execute(ins)
         return result.lastrowid
 
-    def GetLastSeason(seriasId):
-        result = seasons.select().where(seasons.c.serialId == seriasId)
+    def GetLastSeason(serialId):
+        result = seasons.select().where(seasons.c.serialId == serialId)
         data = CONNECTION.execute(result).all()
+        if data == []:
+            return None
         data = data[-1]._asdict()
         return data

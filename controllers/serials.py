@@ -11,6 +11,9 @@ def randomSerials(count):
     serials = Serials.GetRandomSerials(count)
     for i, serial in enumerate(serials):
         last_season = Seasons.GetLastSeason(serial['id'])
+        if(last_season is None):
+            serial = Serials.GetRandomSerials(1)[0]
+            last_season = Seasons.GetLastSeason(serial['id'])
         serial['last_season'] = last_season
         serials[i] = serial
     return json.dumps(serials)
